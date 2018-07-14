@@ -1,0 +1,861 @@
+{% import "mixins/flash-messages.html" as FM %}
+
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>{{ title|default("Tourism") }}</title>
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"> {# Customise the stylesheet for your site by editing /public/styles/site.sass #}
+	<link href="/styles/site.css" rel="stylesheet">
+	<link href="/styles/styles.css" rel="stylesheet"> {# This file provides the default styling for the KeystoneJS Content Editor #} {% if user and user.canAccessKeystone %}
+	<link href="/keystone/styles/content/editor.min.css" rel="stylesheet"> {% endif %} {# HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries Safely remove this block if you
+	are not targeting IE8 #}
+	<!--[if lt IE 9]>
+			<script src="//cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.js"></script>
+			<script src="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+	{# Include template-specific stylesheets by extending the css block #} {% block css %}{% endblock %} {# Add any other template-specific
+	HEAD tags by extending the head block #} {% block head %}{% endblock %}
+	<link href="styles/global_8a1856d349fa7a77_149.css" rel="stylesheet">
+	<link href="styles/middle_1c2cf1c25461f8ab_149.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="styles/theme.css" rel="stylesheet">
+</head>
+
+<body>
+
+	{# HEADER #}
+	<!-- <div id="header" style="margin:0px !important;">
+
+		{# Customise your site"s navigation by changing the navLinks Array in ./routes/middleware.js ... or completely change this
+		header to suit your design. #}
+		<div role="navigation" class="navbar navbar-default" style="margin:0px !important;">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/">Tourism</a>
+				</div>
+
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav navbar-left">
+						{% for link in navLinks %} {% if loop.index
+						< navLinks.length %} <li class="{{ 'active' if link.key == section else '' }}">
+							<a href="{{ link.href }}">{{ link.label }}</a>
+							</li>
+							{% endif %} {% endfor %}
+					</ul>
+
+					<div class="dropdown navbar-left">
+						<button class="dropbtn">Page</button>
+						<div class="dropdown-content">
+							<div class="row">
+								<div class="col-md-4">
+									<img class="col-md-12" src="/images/logo.svg" width="150" height="50" />
+									<img class="col-md-12" src="/images/logo.svg" width="150" height="50" />
+								</div>
+								<div class="col-md-8">
+									<div class="col-md-12">
+										<div class="col-md-6">
+											{% for cat in data.pagescategory %}
+											<dl class="row detail-list">
+												<dt class="col-md-12">
+													<a class="col-md-12" href="#">{{ cat.name }}</a>
+												</dt>
+												{% for p in data.pages %} {% set itemid = cat._id | string %} {% if p.categories == itemid %}
+												<dd class="col-md-12">
+													<a class="col-md-12" href="/page/{{p.title}}">{{ p.title }}</a>
+												</dd>
+												{% endif %} {% endfor %}
+											</dl>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<ul class="nav navbar-nav navbar-right">
+						{% if user %} {% if user.canAccessKeystone %}
+						<li>
+							<a href="/keystone">Open Admin Panel</a>
+						</li>
+						{% endif %}
+						<li>
+							<a href="/keystone/signout">Sign Out</a>
+						</li>
+						{% else %}
+						<li>
+							<a href="/keystone/signin">Sign In</a>
+						</li>
+						{% endif %}
+					</ul>
+				</div>
+
+			</div>
+		</div>
+	</div> -->
+
+	<section id="zone_heading" class="zone zone_heading">
+		<div class="row">
+			<div class="module module-globalheader module-globalheader--default col col--1-1 collapse-up" id="module-2183098">
+				<div id="global-header" class="c-pagehead" role="banner">
+					<header class="c-pagehead__header" style="height: 102px;">
+						<div id="sticky-header" class="c-pagehead__container">
+							<div class="c-pagehead__wrapper">
+								<div class="c-pagehead__row">
+									<a href="#" class="c-site-logo ">
+										<img src="images/logo/tourism2.svg" alt="100% Indian" width="280px" height="27px" style="width: 280px;height: 27px;" />
+									</a>
+									<ul class="c-pagehead__utilities">
+										<li class="c-utilities__item c-utilities__divider c-utilities__usermenu" style="border-right:unset">
+											<menu class="c-usermenu js-user-anonymous" aria-hidden="false">
+												<!-- <li>
+													<a href="/keystone/signin" class="c-utilities__link sign-in js-user-sign-in">
+														Sign in
+													</a>
+												</li>
+												<li>
+													<a href="#" class="c-utilities__link sign-up js-user-sign-up">
+														Sign up
+													</a>
+												</li> -->
+												{% if user %} {% if user.canAccessKeystone %}
+												<li>
+													<a href="/keystone">Open Admin Panel</a>
+												</li>
+												{% endif %}
+												<li>
+													<a href="/keystone/signout">Sign Out</a>
+												</li>
+												{% else %}
+												<li>
+													<a href="/keystone/signin">Sign In</a>
+												</li>
+												{% endif %}
+											</menu>
+											<menu class="c-usermenu js-user-loggedin" aria-hidden="true" hidden="hidden">
+												<li>
+													<a href="/#" class="c-utilities__link user-profile js-user-profile">Profile</a>
+												</li>
+												<li>
+													<a href="/#" class="c-utilities__link sign-out js-sign-out">Sign out</a>
+												</li>
+											</menu>
+										</li>
+										<!-- <li class="c-utilities__item">
+										</li>
+										<li class="c-utilities__item">
+											<a href="/#/utilities/search/" class="c-search__link c-utilities__link c-feature c-feature--critical icon-search"
+											 aria-hidden="false">Search</a>
+											<form class="c-search js-c-search" role="search" method="get" action="/#/utilities/search/" aria-hidden="true">
+												<label aria-hidden="true" for="c-search__field" class="c-search__label h-hidden" hidden="">Search</label>
+												<input id="c-search__field" aria-label="Search" class="c-search__field js-gsa-search-field ui-autocomplete-input" aria-required="true"
+												 required="" type="text" placeholder="Search" name="q" autocomplete="off">
+												<input type="submit" class="c-search__submit" value="" aria-label="Search">
+											</form>
+										</li> -->
+									</ul>
+								</div>
+								<nav class="c-primary-menu" id="js-c-primary-menu" role="navigation" aria-label="Primary menu">
+									<ul class="c-primary-menu__bar" role="menubar">
+										<li class="c-primary-menu__item c-primary-menu__item--home" role="menuitem" style="width:44px;height:45px;">
+											<a href="#" style="width: 100%;height: 100%;;">
+												<i class="fa fa-home" aria-hidden="true" style="font-size:25px;margin-top: 25%;margin-left: 25%;color:#fff;"></i>
+											</a>
+										</li>
+										<li class="c-primary-menu__item" role="menuitem" aria-haspopup="true" tabindex="0">
+											<!-- <a class="c-primary-menu__link" rel="Akamai-prefetch" href="/#/destinations/" data-name_key="destinations" data-track="OMNI"
+											 data-events="event35" data-description="nav:header:destinations" data-trackstring="header:destinations" data-group_name="destinations">
+												<span class="c-primary-menu__label">Destinations</span>
+											</a> -->
+											<a class="c-primary-menu__link" rel="Akamai-prefetch" href="/innerpage" data-name_key="destinations" data-track="OMNI"
+											 data-events="event35" data-description="nav:header:destinations" data-trackstring="header:destinations" data-group_name="destinations">
+												<span class="c-primary-menu__label">Destinations</span>
+											</a>
+											<div class="c-primary-submenu c-primary-submenu--3" role="menu" aria-label="submenu" aria-expanded="false" aria-hidden="true"
+											 hidden="">
+												<div class="c-primary-submenu__wrapper">
+													<div class="c-primary-submenu__tiles c-primary-submenu__col">
+														<a rel="Akamai-prefetch" href="/#/destinations/" data-name_key="destinations" data-track="OMNI" data-events="event35" data-description="nav:header:destinations:feature:destinations"
+														 data-trackstring="header:destinations:feature:destinations" data-group_name="destinations">
+															<figure role="menuitem" data-unique_id="2797936" class="devicecontext-desktop lazy--loaded" id="FIG-9D67CB47D56EE6A685F065E627E79DAD">
+																<span id="SPAN-FIG-9D67CB47D56EE6A685F065E627E79DAD" class="figure-image--wrapper">
+																	<img id="img-FIG-9D67CB47D56EE6A685F065E627E79DAD" alt="Cape Kidnappers" class="lazy lazy-loading" data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/cape-kidnappers.jpg?outputformat=jpg&amp;quality=75&amp;source=2797936&amp;transformationsystem=letterbox&amp;width=300&amp;securitytoken=66F9A2403139D6827C82886E421546A8"
+																	 src="images/cape-kidnappers.jpg">
+																	<noscript>
+																		<img src="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/cape-kidnappers.jpg?outputformat=jpg&quality=50&source=2797936&transformationsystem=letterbox&width=600&securitytoken=3CC81D70835E7C66701A6F56684AE33F"
+																		 alt="Cape Kidnappers" />
+																	</noscript>
+																</span>
+																<figcaption>Map</figcaption>
+															</figure>
+														</a>
+													</div>
+													<div class="c-primary-submenu__container">
+														<dl class="c-primary-submenu__listbox c-primary-submenu__col">
+															<dt class="c-primary-submenu__title" role="menuitem">
+																<a href="/#/gujarat/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="north-island" data-track="OMNI"
+																 data-events="event35" data-description="nav:header:destinations:menu:north-island" data-trackstring="header:destinations:menu:north-island"
+																 data-group_name="destinations">
+																	Gujarat
+																</a>
+															</dt>
+															<dd aria-label="North Island">
+																<ul class="c-primary-submenu__list">
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/ahmedabad/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="north-island" data-track="OMNI"
+																		 data-events="event35" data-description="nav:header:destinations:menu:north-island" data-trackstring="header:destinations:menu:north-island"
+																		 data-group_name="destinations">
+																			Ahmedabad
+																		</a>
+																	</li>
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/rajkot/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="auckland" data-track="OMNI" data-events="event35"
+																		 data-description="nav:header:destinations:menu:auckland" data-trackstring="header:destinations:menu:auckland"
+																		 data-group_name="destinations">
+																			Rajkot
+																		</a>
+																	</li>
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/gandhidham/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="auckland" data-track="OMNI"
+																		 data-events="event35" data-description="nav:header:destinations:menu:auckland" data-trackstring="header:destinations:menu:auckland"
+																		 data-group_name="destinations">
+																			Gandhidham
+																		</a>
+																	</li>
+																</ul>
+															</dd>
+														</dl>
+														<dl class="c-primary-submenu__listbox c-primary-submenu__col">
+															<dt class="c-primary-submenu__title" role="menuitem">
+																<a href="/#/maharashtra/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="south-island" data-track="OMNI"
+																 data-events="event35" data-description="nav:header:destinations:menu:south-island" data-trackstring="header:destinations:menu:south-island"
+																 data-group_name="destinations">
+																	Maharashtra
+																</a>
+															</dt>
+															<dd aria-label="South Island">
+																<ul class="c-primary-submenu__list">
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/mumbai/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="south-island" data-track="OMNI"
+																		 data-events="event35" data-description="nav:header:destinations:menu:south-island" data-trackstring="header:destinations:menu:south-island"
+																		 data-group_name="destinations">
+																			Mumbai
+																		</a>
+																	</li>
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/pune/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="central-otago" data-track="OMNI"
+																		 data-events="event35" data-description="nav:header:destinations:menu:central-otago" data-trackstring="header:destinations:menu:central-otago"
+																		 data-group_name="destinations">
+																			Pune
+																		</a>
+																	</li>
+																</ul>
+															</dd>
+														</dl>
+														<dl class="c-primary-submenu__listbox c-primary-submenu__col">
+															<dt class="c-primary-submenu__title" role="menuitem">
+																<a href="/#/karnataka/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="other-islands" data-track="OMNI"
+																 data-events="event35" data-description="nav:header:destinations:menu:other-islands" data-trackstring="header:destinations:menu:other-islands"
+																 data-group_name="destinations">
+																	Karnataka
+																</a>
+															</dt>
+															<dd aria-label="Other Islands">
+																<ul class="c-primary-submenu__list">
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/bangalore/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="other-islands" data-track="OMNI"
+																		 data-events="event35" data-description="nav:header:destinations:menu:other-islands" data-trackstring="header:destinations:menu:other-islands"
+																		 data-group_name="destinations">
+																			Bangalore
+																		</a>
+																	</li>
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/mysore/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="chatham-islands" data-track="OMNI"
+																		 data-events="event35" data-description="nav:header:destinations:menu:chatham-islands" data-trackstring="header:destinations:menu:chatham-islands"
+																		 data-group_name="destinations">
+																			Mysore
+																		</a>
+																	</li>
+																	<dt class="c-primary-submenu__title" role="menuitem">
+																		<a href="/#/tamilnadu/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="other-islands" data-track="OMNI"
+																		 data-events="event35" data-description="nav:header:destinations:menu:other-islands" data-trackstring="header:destinations:menu:other-islands"
+																		 data-group_name="destinations">
+																			Tamil Nadu
+																		</a>
+																	</dt>
+																	<dd aria-label="Popular places">
+																		<ul class="c-primary-submenu__list">
+																			<li class="c-primary-submenu__item" role="menuitem">
+																				<a href="/#/chennai" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="national-parks-aoraki-mount-cook"
+																				 data-track="OMNI" data-events="event35" data-description="nav:header:destinations:menu:national-parks-aoraki-mount-cook"
+																				 data-trackstring="header:destinations:menu:national-parks-aoraki-mount-cook" data-group_name="destinations">
+																					Chennai
+																				</a>
+																			</li>
+																			<li class="c-primary-submenu__item" role="menuitem">
+																				<a href="/#/vellore" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="west-coast-glaciers" data-track="OMNI"
+																				 data-events="event35" data-description="nav:header:destinations:menu:west-coast-glaciers" data-trackstring="header:destinations:menu:west-coast-glaciers"
+																				 data-group_name="destinations">
+																					Vellore
+																				</a>
+																			</li>
+																		</ul>
+																	</dd>
+																</ul>
+															</dd>
+														</dl>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li class="c-primary-menu__item" role="menuitem" aria-haspopup="true" tabindex="0">
+											<a class="c-primary-menu__link" rel="Akamai-prefetch" href="/#/things-to-do/" data-name_key="things-to-do" data-track="OMNI"
+											 data-events="event35" data-description="nav:header:things-to-do" data-trackstring="header:things-to-do" data-group_name="things-to-do">
+												<span class="c-primary-menu__label">Things to do</span>
+											</a>
+											<div class="c-primary-submenu c-primary-submenu--2" role="menu" aria-label="submenu" aria-expanded="false" aria-hidden="true"
+											 hidden="">
+												<div class="c-primary-submenu__wrapper">
+													<div class="c-primary-submenu__tiles c-primary-submenu__col">
+														<a rel="Akamai-prefetch" href="/#/things-to-do/" data-name_key="things-to-do" data-track="OMNI" data-events="event35" data-description="nav:header:things-to-do:feature:things-to-do"
+														 data-trackstring="header:things-to-do:feature:things-to-do" data-group_name="things-to-do">
+															<figure role="menuitem" data-unique_id="2153477" class="devicecontext-desktop lazy--loaded" id="FIG-0BD05847F1454D79D61A1269E0031E44">
+																<span id="SPAN-FIG-0BD05847F1454D79D61A1269E0031E44" class="figure-image--wrapper">
+																	<img id="img-FIG-0BD05847F1454D79D61A1269E0031E44" alt="Kayaking" class="lazy lazy-loading" src="images/kayaking.jpg">
+																	<noscript>
+																		<img src="images/kayaking.jpg" alt="Kayaking" />
+																	</noscript>
+																</span>
+																<figcaption>Find things to do</figcaption>
+															</figure>
+														</a>
+														<a rel="Akamai-prefetch" href="/#/home-of-middle-earth/" data-name_key="home-of-middle-earth" data-track="OMNI" data-events="event35"
+														 data-description="nav:header:things-to-do:feature:home-of-middle-earth" data-trackstring="header:things-to-do:feature:home-of-middle-earth"
+														 data-group_name="things-to-do">
+															<figure role="menuitem" data-unique_id="1911495" class="devicecontext-desktop lazy--loaded" id="FIG-7712E3BE0B89D8217ECED9B9C1589DDC">
+																<span id="SPAN-FIG-7712E3BE0B89D8217ECED9B9C1589DDC" class="figure-image--wrapper">
+																	<img id="img-FIG-7712E3BE0B89D8217ECED9B9C1589DDC" alt="Hobbit Hole, Hobbiton, Matamata" class="lazy lazy-loading" data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/hobbit-hole-hobbiton-matamata.jpg?outputformat=jpg&amp;quality=75&amp;source=1911495&amp;transformationsystem=letterbox&amp;width=300&amp;securitytoken=3E6220347EE70ED99B1BE305B99DA545"
+																	 src="images/hobbit-hole-hobbiton-matamata.jpg">
+																	<noscript>
+																		<img src="images/hobbit-hole-hobbiton-matamata.jpg" alt="Hobbit Hole, Hobbiton, Matamata" />
+																	</noscript>
+																</span>
+																<figcaption>Home of Middle‑earth</figcaption>
+															</figure>
+														</a>
+													</div>
+													<div class="c-primary-submenu__container">
+														<dl class="c-primary-submenu__listbox c-primary-submenu__col">
+															<dt class="c-primary-submenu__title" role="menuitem">
+																Activities
+															</dt>
+															<dd aria-label="Activities">
+																<ul class="c-primary-submenu__list">
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/adventure/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="adventure" data-track="OMNI"
+																		 data-events="event35" data-description="nav:header:things-to-do:menu:adventure" data-trackstring="header:things-to-do:menu:adventure"
+																		 data-group_name="things-to-do">
+																			Adventure
+																		</a>
+																	</li>
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/air-activities/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="air-activities" data-track="OMNI"
+																		 data-events="event35" data-description="nav:header:things-to-do:menu:air-activities" data-trackstring="header:things-to-do:menu:air-activities"
+																		 data-group_name="things-to-do">
+																			Air activities
+																		</a>
+																	</li>
+																</ul>
+															</dd>
+														</dl>
+														<dl class="c-primary-submenu__listbox c-primary-submenu__col">
+															<dt class="c-primary-submenu__title" role="menuitem">
+																Holiday types
+															</dt>
+															<dd aria-label="Holiday types">
+																<ul class="c-primary-submenu__list">
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/backpacking/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="backpacking" data-track="OMNI"
+																		 data-events="event35" data-description="nav:header:things-to-do:menu:backpacking" data-trackstring="header:things-to-do:menu:backpacking"
+																		 data-group_name="things-to-do">
+																			Backpacking
+																		</a>
+																	</li>
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/camping/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="camping" data-track="OMNI" data-events="event35"
+																		 data-description="nav:header:things-to-do:menu:camping" data-trackstring="header:things-to-do:menu:camping"
+																		 data-group_name="things-to-do">
+																			Camping
+																		</a>
+																	</li>
+																</ul>
+															</dd>
+														</dl>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li class="c-primary-menu__item" role="menuitem" aria-haspopup="true" tabindex="0">
+											<a class="c-primary-menu__link" rel="Akamai-prefetch" href="/#/facts/" data-name_key="facts" data-track="OMNI" data-events="event35"
+											 data-description="nav:header:facts" data-trackstring="header:facts" data-group_name="facts">
+												<span class="c-primary-menu__label">Facts</span>
+											</a>
+											<div class="c-primary-submenu " role="menu" aria-label="submenu" aria-expanded="false" aria-hidden="true" hidden="">
+												<div class="c-primary-submenu__wrapper">
+													<div class="c-primary-submenu__tiles c-primary-submenu__col">
+														<a rel="Akamai-prefetch" href="/#/facts/" data-name_key="facts" data-track="OMNI" data-events="event35" data-description="nav:header:facts:feature:facts"
+														 data-trackstring="header:facts:feature:facts" data-group_name="facts">
+															<figure role="menuitem" data-unique_id="2853061" class="devicecontext-desktop lazy--loaded" id="FIG-C4D5EA1966873362CB664D24D57B3F99">
+																<span id="SPAN-FIG-C4D5EA1966873362CB664D24D57B3F99" class="figure-image--wrapper">
+																	<img id="img-FIG-C4D5EA1966873362CB664D24D57B3F99" alt="Maori Hongi" class="lazy lazy-loading" data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/maori-hongi.jpg?outputformat=jpg&amp;quality=75&amp;source=2853061&amp;transformationsystem=letterbox&amp;width=300&amp;securitytoken=673532DC34C1960EBEC7C6D65E6FB1DF"
+																	 src="images/maori-hongi.jpg">
+																	<noscript>
+																		<img src="images/maori-hongi.jpg" alt="Maori Hongi" />
+																	</noscript>
+																</span>
+																<figcaption>Facts about India</figcaption>
+															</figure>
+														</a>
+														<a rel="Akamai-prefetch" href="/#/travel-guide/" data-name_key="travel-guide" data-track="OMNI" data-events="event35" data-description="nav:header:facts:feature:travel-guide"
+														 data-trackstring="header:facts:feature:travel-guide" data-group_name="facts">
+															<figure role="menuitem" data-unique_id="1127570" class="devicecontext-desktop lazy--loaded" id="FIG-A6F078F4F8EE0F4B3582516FDAA4ED97">
+																<span id="SPAN-FIG-A6F078F4F8EE0F4B3582516FDAA4ED97" class="figure-image--wrapper">
+																	<img id="img-FIG-A6F078F4F8EE0F4B3582516FDAA4ED97" alt="Travel to New Zealand" class="lazy lazy-loading" data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/travel-to-new-zealand.jpg?outputformat=jpg&amp;quality=75&amp;source=1127570&amp;transformationsystem=letterbox&amp;width=300&amp;securitytoken=39440C895E903BD44ACE7B9F4CF30F64"
+																	 src="images/travel-to-new-zealand.jpg">
+																	<noscript>
+																		<img src="images/travel-to-new-zealand.jpg" alt="Travel to New&nbsp;Zealand" />
+																	</noscript>
+																</span>
+																<figcaption>Travel guide</figcaption>
+															</figure>
+														</a>
+													</div>
+													<div class="c-primary-submenu__container">
+														<dl class="c-primary-submenu__listbox c-primary-submenu__col">
+															<dt class="c-primary-submenu__title" role="menuitem">
+																Read about
+															</dt>
+															<dd aria-label="Read about">
+																<ul class="c-primary-submenu__list">
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/feature/india-currency/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="new-zealand-currency"
+																		 data-track="OMNI" data-events="event35" data-description="nav:header:facts:menu:new-zealand-currency" data-trackstring="header:facts:menu:new-zealand-currency"
+																		 data-group_name="facts">
+																			Currency
+																		</a>
+																	</li>
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/driving-in-india/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="driving-in-new-zealand"
+																		 data-track="OMNI" data-events="event35" data-description="nav:header:facts:menu:driving-in-new-zealand"
+																		 data-trackstring="header:facts:menu:driving-in-new-zealand" data-group_name="facts">
+																			Driving in India
+																		</a>
+																	</li>
+																</ul>
+															</dd>
+														</dl>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li class="c-primary-menu__item" role="menuitem" aria-haspopup="true" tabindex="0">
+											<a class="c-primary-menu__link" rel="Akamai-prefetch" href="/#/trips-and-driving-itineraries/" data-name_key="trips-and-driving-itineraries"
+											 data-track="OMNI" data-events="event35" data-description="nav:header:trips-and-driving-itineraries" data-trackstring="header:trips-and-driving-itineraries"
+											 data-group_name="trips-and-driving-itineraries">
+												<abbr class="w-adaptive__label c-primary-menu__label" title="Recommended trips" style="cursor: unset;">
+													<span>Itineraries</span>
+												</abbr>
+											</a>
+											<div class="c-primary-submenu " role="menu" aria-label="submenu" aria-expanded="false" aria-hidden="true" hidden="">
+												<div class="c-primary-submenu__wrapper">
+													<div class="c-primary-submenu__tiles c-primary-submenu__col">
+														<a rel="Akamai-prefetch" href="/#/trips-and-driving-itineraries/top-india-trips/" data-name_key="top-nz-trips" data-track="OMNI"
+														 data-events="event35" data-description="nav:header:trips-and-driving-itineraries:feature:top-nz-trips" data-trackstring="header:trips-and-driving-itineraries:feature:top-nz-trips"
+														 data-group_name="trips-and-driving-itineraries">
+															<figure role="menuitem" data-unique_id="1122957" class="devicecontext-desktop lazy--loaded" id="FIG-DBF6A4E7C121CB8E2AB935E96B7681DB">
+																<span id="SPAN-FIG-DBF6A4E7C121CB8E2AB935E96B7681DB" class="figure-image--wrapper">
+																	<img id="img-FIG-DBF6A4E7C121CB8E2AB935E96B7681DB" alt="Image soon available" class="lazy lazy-loading" data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/explore-central-otago-in-autumn-and-your-cameras-memory-card-will-soon-be-packed-solid-with-spectac.jpg?outputformat=jpg&amp;quality=75&amp;source=1122957&amp;transformationsystem=letterbox&amp;width=300&amp;securitytoken=8CE1C4BD1A93757EEA07B68275C2EA49"
+																	 src="images/explore-central-otago-in-autumn-and-your-cameras-memory-card-will-soon-be-packed-solid-with-spectac.jpg">
+																	<noscript>
+																		<img src="images/explore-central-otago-in-autumn-and-your-cameras-memory-card-will-soon-be-packed-solid-with-spectac.jpg"
+																		 alt="Image soon available" />
+																	</noscript>
+																</span>
+																<figcaption>Top Indian trips</figcaption>
+															</figure>
+														</a>
+													</div>
+													<div class="c-primary-submenu__container">
+														<dl class="c-primary-submenu__listbox c-primary-submenu__col">
+															<dt class="c-primary-submenu__title" role="menuitem">
+																Read about
+															</dt>
+															<dd aria-label="Read about">
+																<ul class="c-primary-submenu__list">
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/trips-and-driving-itineraries/3-7-days/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="3-7-days"
+																		 data-track="OMNI" data-events="event35" data-description="nav:header:trips-and-driving-itineraries:menu:3-7-days"
+																		 data-trackstring="header:trips-and-driving-itineraries:menu:3-7-days" data-group_name="trips-and-driving-itineraries">
+																			3-7 day itineraries
+																		</a>
+																	</li>
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/trips-and-driving-itineraries/8-14-days/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="8-14-days"
+																		 data-track="OMNI" data-events="event35" data-description="nav:header:trips-and-driving-itineraries:menu:8-14-days"
+																		 data-trackstring="header:trips-and-driving-itineraries:menu:8-14-days" data-group_name="trips-and-driving-itineraries">
+																			8-14 day itineraries
+																		</a>
+																	</li>
+																</ul>
+															</dd>
+														</dl>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li class="c-primary-menu__item" role="menuitem" aria-haspopup="true" tabindex="0">
+											<a class="c-primary-menu__link" rel="Akamai-prefetch" href="/#/getting-around/" data-name_key="getting-around" data-track="OMNI"
+											 data-events="event35" data-description="nav:header:getting-around" data-trackstring="header:getting-around" data-group_name="getting-around">
+												<span class="c-primary-menu__label">Transport</span>
+											</a>
+											<div class="c-primary-submenu " role="menu" aria-label="submenu" aria-expanded="false" aria-hidden="true" hidden="">
+												<div class="c-primary-submenu__wrapper">
+													<div class="c-primary-submenu__tiles c-primary-submenu__col">
+														<a rel="Akamai-prefetch" href="/#/getting-around/" data-name_key="getting-around" data-track="OMNI" data-events="event35"
+														 data-description="nav:header:getting-around:feature:getting-around" data-trackstring="header:getting-around:feature:getting-around"
+														 data-group_name="getting-around">
+															<figure role="menuitem" data-unique_id="2799426" class="devicecontext-desktop lazy--loaded" id="FIG-30DEC05E38C498BF5D6DDBF5EEB57821">
+																<span id="SPAN-FIG-30DEC05E38C498BF5D6DDBF5EEB57821" class="figure-image--wrapper">
+																	<img id="img-FIG-30DEC05E38C498BF5D6DDBF5EEB57821" alt="KX bus driving on road fall trees autumn FE.jpg" class="lazy lazy-loading"
+																	 data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/kx-bus-driving-on-road-fall-trees-autumn-fejpg.jpg?outputformat=jpg&amp;quality=75&amp;source=2799426&amp;transformationsystem=letterbox&amp;width=300&amp;securitytoken=5F8CF7988389253D3A072954183AF973"
+																	 src="images/kx-bus-driving-on-road-fall-trees-autumn-fejpg.jpg">
+																	<noscript>
+																		<img src="images/kx-bus-driving-on-road-fall-trees-autumn-fejpg.jpg" alt="KX bus driving on road fall trees autumn FE.jpg"
+																		/>
+																	</noscript>
+																</span>
+																<figcaption>Find transport</figcaption>
+															</figure>
+														</a>
+													</div>
+													<div class="c-primary-submenu__container">
+														<dl class="c-primary-submenu__listbox c-primary-submenu__col">
+															<dt class="c-primary-submenu__title" role="menuitem">
+																Read about
+															</dt>
+															<dd aria-label="Read about">
+																<ul class="c-primary-submenu__list">
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/buscoach-transport/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="buscoach-transport"
+																		 data-track="OMNI" data-events="event35" data-description="nav:header:getting-around:menu:buscoach-transport"
+																		 data-trackstring="header:getting-around:menu:buscoach-transport" data-group_name="getting-around">
+																			Buses &amp; coaches
+																		</a>
+																	</li>
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/domestic-flights/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="domestic-flights" data-track="OMNI"
+																		 data-events="event35" data-description="nav:header:getting-around:menu:domestic-flights" data-trackstring="header:getting-around:menu:domestic-flights"
+																		 data-group_name="getting-around">
+																			Domestic Flights
+																		</a>
+																	</li>
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/public-transport-in-india/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="public-transport-in-new-zealand"
+																		 data-track="OMNI" data-events="event35" data-description="nav:header:getting-around:menu:public-transport-in-new-zealand"
+																		 data-trackstring="header:getting-around:menu:public-transport-in-new-zealand" data-group_name="getting-around">
+																			Public transport
+																		</a>
+																	</li>
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/rail/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="rail" data-track="OMNI" data-events="event35"
+																		 data-description="nav:header:getting-around:menu:rail" data-trackstring="header:getting-around:menu:rail"
+																		 data-group_name="getting-around">
+																			Rail journeys
+																		</a>
+																	</li>
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/rental-cars/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="rental-cars" data-track="OMNI"
+																		 data-events="event35" data-description="nav:header:getting-around:menu:rental-cars" data-trackstring="header:getting-around:menu:rental-cars"
+																		 data-group_name="getting-around">
+																			Rental cars
+																		</a>
+																	</li>
+																</ul>
+															</dd>
+														</dl>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li class="c-primary-menu__item" role="menuitem" aria-haspopup="true" tabindex="0">
+											<a class="c-primary-menu__link" rel="Akamai-prefetch" href="/#/accommodation/" data-name_key="accommodation" data-track="OMNI"
+											 data-events="event35" data-description="nav:header:accommodation" data-trackstring="header:accommodation" data-group_name="accommodation">
+												<span class="c-primary-menu__label">Accommodation</span>
+											</a>
+											<div class="c-primary-submenu c-primary-submenu--2" role="menu" aria-label="submenu" aria-expanded="false" aria-hidden="true"
+											 hidden="">
+												<div class="c-primary-submenu__wrapper">
+													<div class="c-primary-submenu__tiles c-primary-submenu__col">
+														<a rel="Akamai-prefetch" href="/#/accommodation/" data-name_key="accommodation" data-track="OMNI" data-events="event35" data-description="nav:header:accommodation:feature:accommodation"
+														 data-trackstring="header:accommodation:feature:accommodation" data-group_name="accommodation">
+															<figure role="menuitem" data-unique_id="1127291" class="devicecontext-desktop lazy--loaded" id="FIG-1D7E730FE09BB188EFF6935C44635B35">
+																<span id="SPAN-FIG-1D7E730FE09BB188EFF6935C44635B35" class="figure-image--wrapper">
+																	<img id="img-FIG-1D7E730FE09BB188EFF6935C44635B35" alt="Cathedral Cove" class="lazy lazy-loading" data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/cathedral-cove.jpg?outputformat=jpg&amp;quality=75&amp;source=1127291&amp;transformationsystem=letterbox&amp;width=300&amp;securitytoken=AE517A958330137A919D1CBCFC960C0C"
+																	 src="images/cathedral-cove.jpg">
+																	<noscript>
+																		<img src="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/cathedral-cove.jpg?outputformat=jpg&quality=50&source=1127291&transformationsystem=letterbox&width=600&securitytoken=B8D613EB299D76BAD03593B50CCAF5FC"
+																		 alt="Cathedral Cove" />
+																	</noscript>
+																</span>
+																<figcaption>Find accommodation</figcaption>
+															</figure>
+														</a>
+													</div>
+													<div class="c-primary-submenu__container">
+														<dl class="c-primary-submenu__listbox c-primary-submenu__col">
+															<dt class="c-primary-submenu__title" role="menuitem">
+																Accommodation types
+															</dt>
+															<dd aria-label="Accommodation types">
+																<ul class="c-primary-submenu__list">
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/apartments/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="apartments" data-track="OMNI"
+																		 data-events="event35" data-description="nav:header:accommodation:menu:apartments" data-trackstring="header:accommodation:menu:apartments"
+																		 data-group_name="accommodation">
+																			Apartments
+																		</a>
+																	</li>
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/holiday-homes/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="holiday-homes" data-track="OMNI"
+																		 data-events="event35" data-description="nav:header:accommodation:menu:holiday-homes" data-trackstring="header:accommodation:menu:holiday-homes"
+																		 data-group_name="accommodation">
+																			Holiday Homes
+																		</a>
+																	</li>
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/hotels/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="hotels" data-track="OMNI" data-events="event35"
+																		 data-description="nav:header:accommodation:menu:hotels" data-trackstring="header:accommodation:menu:hotels"
+																		 data-group_name="accommodation">
+																			Hotels
+																		</a>
+																	</li>
+																</ul>
+															</dd>
+														</dl>
+														<!-- <dl class="c-primary-submenu__listbox c-primary-submenu__col">
+															<dd aria-label="Accommodation types">
+																<ul class="c-primary-submenu__list">																		
+																	<li class="c-primary-submenu__item" role="menuitem">
+																		<a href="/#/hotels/" class="c-primary-submenu__link" rel="Akamai-prefetch" data-name_key="hotels"
+																		 data-track="OMNI" data-events="event35" data-description="nav:header:accommodation:menu:hotels" data-trackstring="header:accommodation:menu:hotels"
+																		 data-group_name="accommodation">
+																			Hotels
+																		</a>
+																	</li>
+																</ul>
+															</dd>
+														</dl> -->
+													</div>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+					</header>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	{# BODY #}
+	<div id="body">
+		{# NOTE: There is no .container wrapping class around body blocks to allow more flexibility in design. Remember to include
+		it in your templates when you override the intro and content blocks! #} {# The Intro block appears above flash messages
+		(used for temporary information display) #} {% block intro %}{% endblock %} {# Flash messages allow you to display once-off
+		status messages to users, e.g. form validation errors, success messages, etc. #} {{ FM.flashMessages(messages) }} {# The
+		content block should contain the body of your template"s content #} {% block content %}{% endblock %}
+	</div>
+
+
+	{# FOOTER #}
+	<!-- <div id="footer" class="container">
+		{# You don"t _have_ to include a link saying your site is powered by KeystoneJS, but we appreciate it! #}
+		<p>Powered by
+			<a href="http://keystonejs.com" target="_blank">KeystoneJS</a>.</p>
+	</div> -->
+	<!-- <div id="footer" class="container text-center">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="col-md-6">
+					<ul class="nav nav-pills nav-stacked">
+						<li>
+							<a href="#">About us</a>
+						</li>
+						<li>
+							<a href="#">Blog</a>
+						</li>
+						<li>
+							<a href="#">Post</a>
+						</li>
+						<li>
+							<a href="#">Image Gallery</a>
+						</li>
+						<li>
+							<a href="#">Blog</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-6">
+					<ul class="nav nav-pills nav-stacked">
+						<li>
+							<a href="#">Contact Us</a>
+						</li>
+						<li>
+							<a href="#">About Us</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-lg-12">
+				<ul class="nav nav-pills nav-justified">
+					<li>
+						<a href="/">© 2018 Company Name.</a>
+					</li>
+					<li>
+						<a href="#">Terms of Service</a>
+					</li>
+					<li>
+						<a href="#">Privacy</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div> -->
+
+	<section id="zone_footer" class="zone zone_footer">
+		<div class="row">
+			<div data-o_id="4701583" data-renderertype="default" class="module module-globalfooter module-globalfooter--default col col--1-1"
+			 id="module-2183101">
+				<!--googleoff: index-->
+				<div id="gdpr-footer-content"></div>
+				<div class="global-footer" id="js-global-footer">
+					<div class="page container" style="margin-left:15%;width:950px;">
+						<section class="social">
+							<h4>Find us on</h4>
+							<ul>
+								<li>
+									<a href="https://twitter.com/indiatourism" target="_blank" data-description="footer:findus:twitter" data-group_name="findus"
+									 data-name_key="twitter">
+										<i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a>
+								</li>
+								<li>
+									<a href="https://www.instagram.com/indiatourism/" target="_blank" data-description="footer:findus:instagram" data-group_name="findus"
+									 data-name_key="instagram">
+										<i class="fa fa-instagram" aria-hidden="true"></i> Instagram</a>
+								</li>
+								<li>
+									<a href="https://www.facebook.com/indiatourism" target="_blank" data-description="footer:findus:facebook" data-group_name="findus"
+									 data-name_key="facebook">
+										<i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
+								</li>
+								<li>
+									<a href="https://plus.google.com/+indiatourism/" target="_blank" data-description="footer:findus:googleplus" data-group_name="findus"
+									 data-name_key="googleplus">
+										<i class="fa fa-google-plus" aria-hidden="true"></i> Google+</a>
+								</li>
+								<li>
+									<a href="https://www.youtube.com/indiatourism" target="_blank" data-description="footer:findus:youtube" data-group_name="findus"
+									 data-name_key="youtube">
+										<i class="fa fa-youtube" aria-hidden="true"></i> YouTube</a>
+								</li>
+							</ul>
+						</section>
+						<section>
+							<h4>Contact Us</h4>
+							<ul class="_contact-us">
+								<li>
+									<a href="/#/utilities/site-feedback/" data-description="footer:contact:sitefeedback" data-group_name="contact" data-name_key="sitefeedback">Site feedback</a>
+								</li>
+								<li>
+									<a href="/#/utilities/report-a-problem/" data-description="footer:contact:reportaproblem" data-group_name="contact" data-name_key="reportaproblem">Report a problem</a>
+								</li>
+							</ul>
+						</section>
+						<section>
+							<h4>Help</h4>
+							<ul>
+								<li>
+									<a href="/#/utilities/frequently-asked-questions/" data-description="footer:contact:askaquestion" data-group_name="contact"
+									 data-name_key="askaquestion">FAQs</a>
+								</li>
+								<li>
+									<a href="/#/utilities/about-newzealand/" data-description="footer:help:about" data-group_name="help" data-name_key="about">About tourism.com</a>
+								</li>
+								<li>
+									<a href="/#/utilities/terms-of-use/" data-description="footer:help:termsofuse" data-group_name="help" data-name_key="termsofuse">Terms of use</a>
+								</li>
+								<li>
+									<a href="/#/utilities/privacy-policy/" data-description="footer:help:privacypolicy" data-group_name="help" data-name_key="privacypolicy">Privacy Policy</a>
+								</li>
+							</ul>
+						</section>
+						<section>
+							<h4>Our other sites</h4>
+							<ul>
+								<li>
+									<a href="https://kodavahockey.com/" class="no-tnz-router" target="_blank" data-description="footer:othersite:media" data-group_name="othersite"
+									 data-name_key="media">kodavahockey</a>
+								</li>
+								<li>
+									<a href="http://moga.org.au/new/moga/" class="no-tnz-router" target="_blank" data-description="footer:othersite:imagelibrary"
+									 data-group_name="othersite" data-name_key="imagelibrary">Moga website</a>
+								</li>
+							</ul>
+						</section>
+						<section class="footer-logo">
+							<img src="images/logo/tourism2.svg" alt="" style="width:280px;height:27px;">
+						</section>
+						<!-- <section class="trip-advisor">
+									<h4> Ratings provided by</h4>
+									<img src="images/trip-advisor.png" alt="Trip Advisor Logo">
+									<p> Check out what other travelers say about
+										<a href="https://www.tripadvisor.in/Tourism-g255104-New_Zealand-Vacations.html" target="_blank" data-group_name="nav" data-name_key="tripadvisor"
+										 data-description="footer:nav:tripadvisor">New&nbsp;Zealand</a> on TripAdvisor.</p>
+								</section> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+	{# JAVASCRIPT #} {# jQuery 1.11.3 is included by default, and required by both Bootstrap and the KeystoneJS Content Editor.
+	If you are not targeting IE8, you can upgrade to 2.1.4 (also bundled) for better performance. #}
+	<script src="/js/jquery/jquery-1.11.3.min.js"></script> {# Customise which Bootstrap javascript files are served by including them specifically here, instead of bootstrap-3.3.5.min.js
+	#}
+	<script src="/js/bootstrap/bootstrap-3.3.5.min.js"></script> {# The KeystoneJS Content Editor provides support for ks-editable data attributes, which generate links to edit content
+	for users who can access Keystone #} {% if user and user.canAccessKeystone %}
+	<script src="/keystone/js/content/editor.js"></script> {% endif %} {# Add scripts that are globally required by your site here. #} {# Include template-specific javascript files
+	by extending the js block #} {% block js %}{% endblock %}
+</body>
+
+</html>

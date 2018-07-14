@@ -1,0 +1,326 @@
+{% extends "layouts/default.html" %} {% block content %}
+<script src="/js/jquery/jquery-1.11.3.min.js"></script>
+<section id="zone_body" class="zone zone_body">
+
+	<div class="row" style="margin-top: 0px;">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				{% for sld in data.slider %}
+				<li data-target="#myCarousel" data-slide-to="{{ loop.index-1 }}" class="{{ dotActiveClass }}"></li>
+				{% set dotActiveClass = ( "active" if loop.index == 1 else "" ) %} {% endfor %}
+				<!-- <li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+				<li data-target="#myCarousel" data-slide-to="3"></li> -->
+			</ol>
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+				{% for sl in data.slider %}
+				<div class="item {{ sliderActiveClass }}">{% set sliderActiveClass = ( "active" if loop.index == 1 else "" ) %}
+					<!-- <img src="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/hobbiton-movie-set.jpg?focalpointx=35&focalpointy=77&height=420&outputformat=jpg&quality=75&source=3686424&transformationsystem=focalpointcrop&width=960&securitytoken=9256C2C6ABED631B4A9BB659721B6008" alt="Los Angeles" style="width:100%;"> -->
+					<figure data-unique_id="4318170" class="devicecontext-desktop" id="FIG-1F4C5DEABEC8F0FDCC94C115FABC348E_clone">
+						<div class="c-carousel__slide">
+							<div class="c-carousel-slide__asset">
+								<span id="SPAN-FIG-1F4C5DEABEC8F0FDCC94C115FABC348E_clone" class="figure-image--wrapper">
+									<img id="img-FIG-1F4C5DEABEC8F0FDCC94C115FABC348E_clone" data-carouselposition="2" alt="Kaikoura" src="{{ sl.sliderImage.url }}"
+									 style="display:block" draggable="false">
+									<noscript>
+										<img src="{{ sl.sliderImage.url }}" alt="Kaikoura" />
+									</noscript>
+								</span>
+							</div>
+							<div class="c-carousel-slide__content">
+								<a href="{{ sl.buttonLink }}" class="promoblock js-promoblock" data-image_name_key="kaikoura">
+									<div class="w-mediablock--caption position-topLeft">
+										<h4 class="promoblock__title">{{ sl.title }}</h4>
+										<p class="promoblock__description">{{ sl.description }}</p>
+										<button class="button button--default">{{ sl.buttonTitle }}</button>
+									</div>
+								</a>
+							</div>
+						</div>
+					</figure>
+				</div>
+				{% endfor %}
+
+			</div>
+
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="right carousel-control" href="#myCarousel" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="constrained-width">
+			<div data-o_id="4915260" data-renderertype="text" class="module module-content module-content--text col col--1-1" id="module-2320215">
+				<div class="content--main">
+					<h2>
+						<b>Gujarat is India's largest city and main transport hub. Make sure you stop and enjoy the shopping, dining and natural
+							wonders Gujarat has to offer.</b>
+					</h2>
+					<p class="intro text-centre">{{ ban.subSectionDescription }}</p>
+					<div class="copy-block"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="constrained-width">
+			<div data-o_id="5947142" data-renderertype="text" class="module module-content module-content--text col col--1-1" id="module-3544436">
+				<div class="content--main">
+					<div class="copy-block"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="constrained-width">
+			<div data-o_id="4908566" data-renderertype="default" class="module module-nav module-nav--default col col--1-1">
+				<nav class="image-navigation image-navigation--layout-7">
+
+					{% for card in data.cards %}
+					<div class="image-navigation--item">
+						<a href="{{ card.Link }}">
+							<figure data-unique_id="1057327" class="{{ cardSize }} devicecontext-desktop">
+								{% set cardSize = ( "has-ratio-2-1" if card.cardSize == "has-ratio-2-1" else "has-ratio-1-1" ) %}
+								<span class="figure-image--wrapper">
+									<img data-nav="1" alt="Yellow-eyed Penguin, Dunedin" data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/yellow-eyed-penguin-dunedin.jpg?focalpointx=50&amp;focalpointy=50&amp;height=300&amp;outputformat=jpg&amp;quality=75&amp;source=1057327&amp;transformationsystem=focalpointcrop&amp;width=620&amp;securitytoken=BEEAD7CA35B149FD4459587C5307F73F"
+									 src="{{ card.cardImage.url }}">
+								</span>
+								<h4 class="image-navigation--header__initial">{{ card.title }}
+									<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+								</h4>
+								<figcaption class="image-navigation--content">
+									<h4 class="image-navigation--header">{{ card.title }}</h4>
+									<p class="image-navigation--summary">{{ card.description }}</p>
+								</figcaption>
+							</figure>
+						</a>
+					</div>
+					{% endfor %}
+
+
+					<div class="image-navigation--item">
+						<a href="/#/adventure/">
+							<figure data-unique_id="4239242" class="has-ratio-1-1 devicecontext-desktop" id="FIG-133AA572BC004868B04AE71DD76F1FE4">
+								<span id="SPAN-FIG-133AA572BC004868B04AE71DD76F1FE4" class="figure-image--wrapper">
+									<img id="img-FIG-133AA572BC004868B04AE71DD76F1FE4" data-nav="2" alt="Skydive" data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/skydive.jpg?focalpointx=50&amp;focalpointy=50&amp;height=320&amp;outputformat=jpg&amp;quality=75&amp;source=4239242&amp;transformationsystem=focalpointcrop&amp;width=320&amp;securitytoken=C4B6BF4320FB7C345F05D845185C1B64"
+									 src="images/cards/card2.jpg">
+									<noscript>
+										<img src="images/cards/card2.jpg" alt="Skydive" />
+									</noscript>
+								</span>
+								<h4 class="image-navigation--header__initial">Looking for thrills?
+									<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+								</h4>
+								<figcaption class="image-navigation--content">
+									<h4 class="image-navigation--header">Looking for thrills?</h4>
+									<p class="image-navigation--summary">If adventure sports press all your buttons, get ready for the trip of a lifetime.</p>
+								</figcaption>
+							</figure>
+						</a>
+					</div>
+					<div class="image-navigation--item">
+						<a href="/#/feature/india-must-do-top-10-romantic-experiences/" data-name_key="india-must-do-top-10-romantic-experiences">
+							<figure data-unique_id="2544642" class="has-ratio-1-1  devicecontext-desktop" id="FIG-753F63ED87EA62BC63A79929EB2EAC7B">
+								<span id="SPAN-FIG-753F63ED87EA62BC63A79929EB2EAC7B" class="figure-image--wrapper">
+									<img id="img-FIG-753F63ED87EA62BC63A79929EB2EAC7B" data-nav="3" alt="Celebrate your senses in Marlborough&#39;s wine region, home to world-class wineries, restaurants, gourmet food producers and the Marlborough Sounds. "
+									 data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/winery.jpg?focalpointx=59&amp;focalpointy=43&amp;height=320&amp;outputformat=jpg&amp;quality=75&amp;source=2544642&amp;transformationsystem=focalpointcrop&amp;width=320&amp;securitytoken=8E620FDD9F5FADE2E5324E43223DBE29"
+									 src="images/cards/card3.jpg">
+									<noscript>
+										<img src="images/cards/card3.jpg" alt="Celebrate your senses in Marlborough's wine region, home to world-class wineries, restaurants, gourmet food producers and the Marlborough Sounds. "
+										/>
+									</noscript>
+								</span>
+								<h4 class="image-navigation--header__initial">Romantic experiences
+									<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+								</h4>
+								<figcaption class="image-navigation--content">
+									<h4 class="image-navigation--header">Romantic experiences</h4>
+									<p class="image-navigation--summary">For starry-eyed romantics, you will find a heavenly array of places to go and things to do for intimate and memorable
+										escapes in India.</p>
+								</figcaption>
+							</figure>
+						</a>
+					</div>
+					<div class="image-navigation--item">
+						<a href="/#/feature/new-zealand-must-do-top-10-food-and-wine-experiences/" data-name_key="new-zealand-must-do-top-10-food-and-wine-experiences">
+							<figure data-unique_id="3070055" class="has-ratio-1-1  devicecontext-desktop" id="FIG-456DED83C452E35235FB6772CED967EC">
+								<span id="SPAN-FIG-456DED83C452E35235FB6772CED967EC" class="figure-image--wrapper">
+									<img id="img-FIG-456DED83C452E35235FB6772CED967EC" data-nav="4" alt="Queen Charlotte Sound" data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/queen-charlotte-sound.jpg?focalpointx=52&amp;focalpointy=57&amp;height=320&amp;outputformat=jpg&amp;quality=75&amp;source=3070055&amp;transformationsystem=focalpointcrop&amp;width=320&amp;securitytoken=13C48BACE5A5CD2CA8834585D5506051"
+									 src="images/cards/card4.jpg">
+									<noscript>
+										<img src="images/cards/card4.jpg" alt="Queen Charlotte Sound" />
+									</noscript>
+								</span>
+								<h4 class="image-navigation--header__initial">Savour great food &amp; wine
+									<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+								</h4>
+								<figcaption class="image-navigation--content">
+									<h4 class="image-navigation--header">Savour great food &amp; wine</h4>
+									<p class="image-navigation--summary">Fresh and vibrant, New&nbsp;Zealand's wine and food is among the best in the world.</p>
+								</figcaption>
+							</figure>
+						</a>
+					</div>
+					<div class="image-navigation--item">
+						<a href="/#/getting-around/" data-name_key="getting-around">
+							<figure data-unique_id="2916838" class="has-ratio-1-1  devicecontext-desktop" id="FIG-84BFE778BD9ED88339863C5DE58E83A2">
+								<span id="SPAN-FIG-84BFE778BD9ED88339863C5DE58E83A2" class="figure-image--wrapper">
+									<img id="img-FIG-84BFE778BD9ED88339863C5DE58E83A2" data-nav="5" alt="Wellington Cable Car" data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/wellington-cable-car.jpg?focalpointx=50&amp;focalpointy=50&amp;height=320&amp;outputformat=jpg&amp;quality=75&amp;source=2916838&amp;transformationsystem=focalpointcrop&amp;width=320&amp;securitytoken=4016D147648D38639E0A36EFA232707F"
+									 src="images/cards/card5.jpg">
+									<noscript>
+										<img src="images/cards/card5.jpg" alt="Wellington Cable Car" />
+									</noscript>
+								</span>
+								<h4 class="image-navigation--header__initial">Getting around
+									<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+								</h4>
+								<figcaption class="image-navigation--content">
+									<h4 class="image-navigation--header">Getting around</h4>
+									<p class="image-navigation--summary">With so many things to do and spectacular places to see, choosing how you travel around New&nbsp;Zealand is as important
+										as choosing where you want to go.</p>
+								</figcaption>
+							</figure>
+						</a>
+					</div>
+					<div class="image-navigation--item">
+						<a href="/#/nzmustdo/" data-name_key="nzmustdo">
+							<figure data-unique_id="3859165" class="has-ratio-1-1  devicecontext-desktop" id="FIG-9DEFCE9AE0CED9700D42B4AF3D4D8466">
+								<span id="SPAN-FIG-9DEFCE9AE0CED9700D42B4AF3D4D8466" class="figure-image--wrapper">
+									<img id="img-FIG-9DEFCE9AE0CED9700D42B4AF3D4D8466" data-nav="6" alt="NZMustDo" data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/nzmustdo.jpg?focalpointx=45&amp;focalpointy=58&amp;height=320&amp;outputformat=jpg&amp;quality=75&amp;source=3859165&amp;transformationsystem=focalpointcrop&amp;width=320&amp;securitytoken=98ECD51F18403458BF541B162628C76B"
+									 src="images/cards/card6.jpg">
+									<noscript>
+										<img src="images/cards/card6.jpg" alt="NZMustDo" />
+									</noscript>
+								</span>
+								<h4 class="image-navigation--header__initial">#IndianMustDo
+									<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+								</h4>
+								<figcaption class="image-navigation--content">
+									<h4 class="image-navigation--header">#IndianMustDo</h4>
+									<p class="image-navigation--summary">See the latest images from travelers exploring India.</p>
+								</figcaption>
+							</figure>
+						</a>
+					</div>
+					<div class="image-navigation--item">
+						<a href="/#/feature/top-things-to-see-and-do-around-new-zealand/" data-name_key="top-things-to-see-and-do-around-new-zealand">
+							<figure data-unique_id="2948467" class="has-ratio-1-1  devicecontext-desktop" id="FIG-5AC853EF11AD299DA7285B6722FB5396">
+								<span id="SPAN-FIG-5AC853EF11AD299DA7285B6722FB5396" class="figure-image--wrapper">
+									<img id="img-FIG-5AC853EF11AD299DA7285B6722FB5396" data-nav="7" alt="Join the cultural performances at Te Puia and learn traditional Maori song and dance."
+									 data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/cultural-performance-at-te-puia.jpg?focalpointx=53&amp;focalpointy=34&amp;height=320&amp;outputformat=jpg&amp;quality=75&amp;source=2948467&amp;transformationsystem=focalpointcrop&amp;width=320&amp;securitytoken=6BED34AD7146F9AE261C943F6C7BC2FA"
+									 src="images/cards/card7.jpg">
+									<noscript>
+										<img src="images/cards/card7.jpg" alt="Join the cultural performances at Te Puia and learn traditional Maori song and dance."
+										/>
+									</noscript>
+								</span>
+								<h4 class="image-navigation--header__initial">Top Picks
+									<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+								</h4>
+								<figcaption class="image-navigation--content">
+									<h4 class="image-navigation--header">Top Picks</h4>
+									<p class="image-navigation--summary">A collection of the must see and must do experiences around India, recommended by travellers and locals.</p>
+								</figcaption>
+							</figure>
+						</a>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+	<div class="row">
+		<div class="constrained-width">
+			<div data-o_id="4895182" data-renderertype="text" class="module module-content module-content--text col col--1-1" id="module-2292407">
+				<div class="content--main">
+					<div class="copy-block">
+						<div class="js-copy copy">
+							<p> Auckland is New&nbsp;Zealand's largest city and main transport hub. The region is home to some 1.5 million people
+								and is also the largest Polynesian city in the world. Imagine an urban environment where everyone lives within half
+								an hour of beautiful beaches, hiking trails and a dozen enchanting holiday islands. Add a sunny climate, a background
+								rhythm of Polynesian culture and a passion for outstanding food, wine and shopping, and you’re beginning to get the
+								picture of Auckland, New&nbsp;Zealand, our largest and most diverse city.</p>
+							<p> More than just a city, Auckland is a whole region full of things to see and do. Best of all, with so many experiences
+								close by it’s easy to hop from one adventure to the next.</p>
+						</div>
+						<div class="collapse" id="demo">
+							<h3> A stunning natural playground</h3>
+							<p> Auckland’s diverse landscapes provide countless opportunities to get immersed in nature. In the west, lush native
+								rainforest plunges down the hills to meet the sea on
+								<a href="https://www.newzealand.com/in/feature/aucklands-west-coast-beaches/">dramatic black sand beaches</a>, while the east’s sheltered golden sand beaches are fringed with red-flowering pohutukawa
+								trees. To the north the rolling hills of wine country meet stunning coastlines and in the south you'll find picturesque
+								country gardens, unspoilt forest and tranquil bays to explore.</p>
+							<h3> Volcanoes&nbsp;</h3>
+							<p> New&nbsp;Zealand's Auckland region is dotted with 48 volcanic cones, which provide spectacular panoramic views of
+								the city and harbour. Many are surrounded by lush parkland, making them perfect picnic spots.&nbsp;
+								<a href="https://www.newzealand.com/in/rangitoto-island/">Rangitoto Island</a>, just a 25-minute ferry ride from downtown Auckland, is the region's most iconic volcano and
+								a favourite day trip destination for visitors, hikers and bird watchers.</p>
+							<p> </p>
+							<h3> Hauraki Gulf and Islands</h3>
+							<p> Auckland’s Hauraki Gulf Marine Park encompasses an incredible 1.2 million hectares of coast, sea and islands – and
+								there are so many ways to explore it. &nbsp;</p>
+							<p> The jewel of the Hauraki Gulf is
+								<a href="https://www.newzealand.com/in/waiheke-island/">Waiheke Island</a>, a haven of beautiful vineyards, olive groves, farm land and golden beaches - and only a 35-minute
+								ferry ride away from downtown Auckland. Sip on award-winning wines at some of the 30 boutique vineyards and
+								<a href="https://www.newzealand.com/in/wineries+waiheke-island/">wineries</a>, enjoy fine dining and pick up superb local artwork.</p>
+							<p> Make sure you get out on the water while you're here, whether it’s a relaxing harbour cruise, a fishing charter, whale
+								and dolphin spotting, kayaking or surfing.</p>
+							<h3> Shopping and dining in Auckland</h3>
+							<p> Auckland is a shopaholic's paradise, with everything from top-end designers to open air street markets. Discover the
+								diverse range of cafes and restaurants offering cuisine from around the globe and check out the buzzing nightlife
+								of the central city. Favourite spots include Wynyard Quarter, the Viaduct Harbour, the Britomart precinct and City
+								Works Depot.
+								<br>
+								<br> Once you've seen the city, head out to one of Auckland's beautiful wine regions where you can sample local wines
+								against the backdrop of vine-covered hills and sparkling ocean.</p>
+							<h3> A city like no other</h3>
+							<p> New&nbsp;Zealand's indigenous Māori people called this land Tāmaki Makaurau, a maiden desired by a hundred lovers.&nbsp;
+								It was a place fought over for its vast riches, including its forested hills, productive volcanic soils and harbours
+								full of seafood. The name still holds true, as Auckland's lifestyle is ranked amongst the best in the world.&nbsp;</p>
+							<p>
+								In fact, Auckland is rated the third most liveable city in the world on the Mercer Quality of Living scale and has just been
+								named as one of the top 10 most liveable cities in the world by The Economist.&nbsp;</p>
+							<p> Come and experience it for yourself. A few days in Auckland, building in a tour or two, is the perfect beginning to
+								your New&nbsp;Zealand vacation.</p>
+						</div>
+						<a href="javascript:;" class="extra-copy-read-more js-read-more is-visible" data-toggle="collapse" data-target="#demo"><i class="fa fa-plus" aria-hidden="true"></i> Read more</a>
+						<a href="javascript:;" class="extra-copy-read-more-close js-read-more-close" data-toggle="collapse" data-target="#demo"><i class="fa fa-minus" aria-hidden="true"></i> Close</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</section>
+<script>
+	$(document).ready(function () {
+		$(document).on("click", ".js-read-more", function () {
+			$(".js-extra-copy").addClass("is-visible");
+			$(this).removeClass("is-visible");
+			$(".js-read-more-close").addClass("is-visible")
+		});
+		$(document).on("click", ".js-read-more-close", function () {
+			$(".js-extra-copy").removeClass("is-visible");
+			$(this).removeClass("is-visible");
+			$(".js-read-more").addClass("is-visible")
+		});
+
+	})
+</script> {% endblock %}

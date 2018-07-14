@@ -1,0 +1,333 @@
+{% extends "layouts/default.html" %} {% block content %}
+
+
+<section id="zone_body" class="zone zone_body">
+	<!-- <div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-10">
+			{% for ban in data.banner %}
+			{% if loop.index == data.banner.length %}
+			<p>Title : {{ ban.title }} </p>
+			<p>Title 2 : {{ ban.title2 }} </p>
+			<p>Title 3 : {{ ban.title3 }} </p>
+			<p>subSectionTitle : {{ ban.subSectionTitle }}</p>
+			<p>subSectionDescription : {{ ban.subSectionDescription }}</p>
+			<p>bannerImage URL : {{ ban.bannerImage.url }}</p>
+			{% endif %}
+			{% endfor %}
+		</div>
+	</div> -->
+
+	<!-- {% for sl in data.slider %}
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-10">
+			<p>Title : {{ sl.title }} </p>
+			<p>Description : {{ sl.description }} </p>
+			<p>sliderImage : {{ sl.sliderImage.url }} </p>
+			<p>buttonTitle : {{ sl.buttonTitle }}</p>
+			<p>buttonLink : {{ sl.buttonLink }}</p>
+		</div>
+	</div>
+	{% endfor %}  -->
+	{% for ban in data.banner %} {% if loop.index == data.banner.length %}
+	<div class="row">
+		<div data-o_id="4908590" data-renderertype="default" class="module module-carousel module-carousel--default col col--1-1 collapse-up"
+		 id="module-2309917">
+			<div class="c-carousel ">
+				<figure data-unique_id="3686424" class="devicecontext-desktop" id="FIG-87539D0465CC206A2D6358B02E2B9BC9">
+					<div class="c-carousel__slide">
+						<div class="c-carousel-slide__asset">
+							<span id="SPAN-FIG-87539D0465CC206A2D6358B02E2B9BC9" class="figure-image--wrapper">
+								<img id="img-FIG-87539D0465CC206A2D6358B02E2B9BC9" data-carouselposition="1" alt="Hobbiton™ Movie Set" src="{{ ban.bannerImage.url }}"
+								 style="display:block">
+								<noscript>
+									<img src="{{ ban.bannerImage.url }}" alt="Hobbiton™ Movie Set" />
+								</noscript>
+							</span>
+						</div>
+						<div class="c-carousel-slide__content">
+							<div class="c-inspirational-text is-overlay position-topRight text-dark js-c-inspirational-text js-ready">
+								<div class="c-inspirational-text__wrapper" data-width="110px">
+									<span class="c-inspirational-text__line line1 text-right text-medium movetext-medium">{{ ban.title }}</span>
+									<span class="c-inspirational-text__line line2 text-right text-large movetext-large">{{ ban.title2 }}</span>
+									<!-- <span class="c-inspirational-text__line line3 text-left text-medium movetext-medium">INDIA</span> -->
+									<span class="c-inspirational-text__line line1 text-right text-medium movetext-medium">{{ ban.title3 }}</span>
+									<span class="c-inspirational-text__line line4 text-left text-medium movetext-medium"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</figure>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="constrained-width">
+			<div data-o_id="4915260" data-renderertype="text" class="module module-content module-content--text col col--1-1" id="module-2320215">
+				<div class="content--main">
+					<h2>
+						<b>{{ ban.subSectionTitle }}</b>
+					</h2>
+					<p class="intro text-centre">{{ ban.subSectionDescription }}</p>
+					<div class="copy-block"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{% endif %} {% endfor %}
+
+	<div class="row">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				{% for sld in data.slider %}
+				<li data-target="#myCarousel" data-slide-to="{{ loop.index-1 }}" class="{{ dotActiveClass }}"></li>
+				{% set dotActiveClass = ( "active" if loop.index == 1 else "" ) %} {% endfor %}
+				<!-- <li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+				<li data-target="#myCarousel" data-slide-to="3"></li> -->
+			</ol>
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+				{% for sl in data.slider %}
+				<div class="item {{ sliderActiveClass }}">{% set sliderActiveClass = ( "active" if loop.index == 1 else "" ) %}
+					<!-- <img src="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/hobbiton-movie-set.jpg?focalpointx=35&focalpointy=77&height=420&outputformat=jpg&quality=75&source=3686424&transformationsystem=focalpointcrop&width=960&securitytoken=9256C2C6ABED631B4A9BB659721B6008" alt="Los Angeles" style="width:100%;"> -->
+					<figure data-unique_id="4318170" class="devicecontext-desktop" id="FIG-1F4C5DEABEC8F0FDCC94C115FABC348E_clone">
+						<div class="c-carousel__slide">
+							<div class="c-carousel-slide__asset">
+								<span id="SPAN-FIG-1F4C5DEABEC8F0FDCC94C115FABC348E_clone" class="figure-image--wrapper">
+									<img id="img-FIG-1F4C5DEABEC8F0FDCC94C115FABC348E_clone" data-carouselposition="2" alt="Kaikoura" src="{{ sl.sliderImage.url }}"
+									 style="display:block" draggable="false">
+									<noscript>
+										<img src="{{ sl.sliderImage.url }}" alt="Kaikoura" />
+									</noscript>
+								</span>
+							</div>
+							<div class="c-carousel-slide__content">
+								<a href="{{ sl.buttonLink }}" class="promoblock js-promoblock" data-image_name_key="kaikoura">
+									<div class="w-mediablock--caption position-topLeft">
+										<h4 class="promoblock__title">{{ sl.title }}</h4>
+										<p class="promoblock__description">{{ sl.description }}</p>
+										<button class="button button--default">{{ sl.buttonTitle }}</button>
+									</div>
+								</a>
+							</div>
+						</div>
+					</figure>
+				</div>
+				{% endfor %}
+
+			</div>
+
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="right carousel-control" href="#myCarousel" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="constrained-width">
+			<div data-o_id="5947142" data-renderertype="text" class="module module-content module-content--text col col--1-1" id="module-3544436">
+				<div class="content--main">
+					<div class="copy-block"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="constrained-width">
+			<div data-o_id="4908675" data-renderertype="text" class="module module-content module-content--text col col--1-1" id="module-2309921">
+				<div class="content--main">
+					<h2>Get inspired</h2>
+					<div class="copy-block">
+						<p style="text-align: center;">
+							<a data-o_id="3719035" href="/#/things-to-do/" title="Things to do">See all things to do</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+							<a data-o_id="3732558" href="/#/destinations/" title="Destinations">All destinations</a>&nbsp; | &nbsp;
+							<a data-o_id="4233523" href="/#/trips-and-driving-itineraries/" title="Recommended Trips">Recommended trips</a>&nbsp; |&nbsp;
+							<a data-tnzlinktype="internallink" href="/#/feature/top-things-to-see-and-do-around-india/" title="top picks">Top Picks</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- {% for card in data.cards %}
+
+	<p>Title : {{ card.title }} </p>
+	<p>Description : {{ card.description }} </p>
+	<p>cardImage : {{ card.cardImage.url }} </p>
+	<p>cardSize : {{ card.cardSize }}</p>
+	<p>Link : {{ card.Link }}</p>
+
+	{% endfor %} -->
+
+	<div class="row">
+		<div class="constrained-width">
+			<div data-o_id="4908566" data-renderertype="default" class="module module-nav module-nav--default col col--1-1">
+				<nav class="image-navigation image-navigation--layout-7">
+
+					{% for card in data.cards %}
+					<div class="image-navigation--item">
+						<a href="{{ card.Link }}">
+							<figure data-unique_id="1057327" class="{{ cardSize }} devicecontext-desktop">
+								{% set cardSize = ( "has-ratio-2-1" if card.cardSize == "has-ratio-2-1" else "has-ratio-1-1" ) %}
+								<span class="figure-image--wrapper">
+									<img data-nav="1" alt="Yellow-eyed Penguin, Dunedin" data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/yellow-eyed-penguin-dunedin.jpg?focalpointx=50&amp;focalpointy=50&amp;height=300&amp;outputformat=jpg&amp;quality=75&amp;source=1057327&amp;transformationsystem=focalpointcrop&amp;width=620&amp;securitytoken=BEEAD7CA35B149FD4459587C5307F73F"
+									 src="{{ card.cardImage.url }}">
+								</span>
+								<h4 class="image-navigation--header__initial">{{ card.title }}
+									<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+								</h4>
+								<figcaption class="image-navigation--content">
+									<h4 class="image-navigation--header">{{ card.title }}</h4>
+									<p class="image-navigation--summary">{{ card.description }}</p>
+								</figcaption>
+							</figure>
+						</a>
+					</div>
+					{% endfor %}
+
+
+					<div class="image-navigation--item">
+						<a href="/#/adventure/">
+							<figure data-unique_id="4239242" class="has-ratio-1-1 devicecontext-desktop" id="FIG-133AA572BC004868B04AE71DD76F1FE4">
+								<span id="SPAN-FIG-133AA572BC004868B04AE71DD76F1FE4" class="figure-image--wrapper">
+									<img id="img-FIG-133AA572BC004868B04AE71DD76F1FE4" data-nav="2" alt="Skydive" data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/skydive.jpg?focalpointx=50&amp;focalpointy=50&amp;height=320&amp;outputformat=jpg&amp;quality=75&amp;source=4239242&amp;transformationsystem=focalpointcrop&amp;width=320&amp;securitytoken=C4B6BF4320FB7C345F05D845185C1B64"
+									 src="images/cards/card2.jpg">
+									<noscript>
+										<img src="images/cards/card2.jpg" alt="Skydive" />
+									</noscript>
+								</span>
+								<h4 class="image-navigation--header__initial">Looking for thrills?
+									<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+								</h4>
+								<figcaption class="image-navigation--content">
+									<h4 class="image-navigation--header">Looking for thrills?</h4>
+									<p class="image-navigation--summary">If adventure sports press all your buttons, get ready for the trip of a lifetime.</p>
+								</figcaption>
+							</figure>
+						</a>
+					</div>
+					<div class="image-navigation--item">
+						<a href="/#/feature/india-must-do-top-10-romantic-experiences/" data-name_key="india-must-do-top-10-romantic-experiences">
+							<figure data-unique_id="2544642" class="has-ratio-1-1  devicecontext-desktop" id="FIG-753F63ED87EA62BC63A79929EB2EAC7B">
+								<span id="SPAN-FIG-753F63ED87EA62BC63A79929EB2EAC7B" class="figure-image--wrapper">
+									<img id="img-FIG-753F63ED87EA62BC63A79929EB2EAC7B" data-nav="3" alt="Celebrate your senses in Marlborough&#39;s wine region, home to world-class wineries, restaurants, gourmet food producers and the Marlborough Sounds. "
+									 data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/winery.jpg?focalpointx=59&amp;focalpointy=43&amp;height=320&amp;outputformat=jpg&amp;quality=75&amp;source=2544642&amp;transformationsystem=focalpointcrop&amp;width=320&amp;securitytoken=8E620FDD9F5FADE2E5324E43223DBE29"
+									 src="images/cards/card3.jpg">
+									<noscript>
+										<img src="images/cards/card3.jpg" alt="Celebrate your senses in Marlborough's wine region, home to world-class wineries, restaurants, gourmet food producers and the Marlborough Sounds. "
+										/>
+									</noscript>
+								</span>
+								<h4 class="image-navigation--header__initial">Romantic experiences
+									<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+								</h4>
+								<figcaption class="image-navigation--content">
+									<h4 class="image-navigation--header">Romantic experiences</h4>
+									<p class="image-navigation--summary">For starry-eyed romantics, you will find a heavenly array of places to go and things to do for intimate and memorable
+										escapes in India.</p>
+								</figcaption>
+							</figure>
+						</a>
+					</div>
+					<div class="image-navigation--item">
+						<a href="/#/feature/new-zealand-must-do-top-10-food-and-wine-experiences/" data-name_key="new-zealand-must-do-top-10-food-and-wine-experiences">
+							<figure data-unique_id="3070055" class="has-ratio-1-1  devicecontext-desktop" id="FIG-456DED83C452E35235FB6772CED967EC">
+								<span id="SPAN-FIG-456DED83C452E35235FB6772CED967EC" class="figure-image--wrapper">
+									<img id="img-FIG-456DED83C452E35235FB6772CED967EC" data-nav="4" alt="Queen Charlotte Sound" data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/queen-charlotte-sound.jpg?focalpointx=52&amp;focalpointy=57&amp;height=320&amp;outputformat=jpg&amp;quality=75&amp;source=3070055&amp;transformationsystem=focalpointcrop&amp;width=320&amp;securitytoken=13C48BACE5A5CD2CA8834585D5506051"
+									 src="images/cards/card4.jpg">
+									<noscript>
+										<img src="images/cards/card4.jpg" alt="Queen Charlotte Sound" />
+									</noscript>
+								</span>
+								<h4 class="image-navigation--header__initial">Savour great food &amp; wine
+									<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+								</h4>
+								<figcaption class="image-navigation--content">
+									<h4 class="image-navigation--header">Savour great food &amp; wine</h4>
+									<p class="image-navigation--summary">Fresh and vibrant, New&nbsp;Zealand's wine and food is among the best in the world.</p>
+								</figcaption>
+							</figure>
+						</a>
+					</div>
+					<div class="image-navigation--item">
+						<a href="/#/getting-around/" data-name_key="getting-around">
+							<figure data-unique_id="2916838" class="has-ratio-1-1  devicecontext-desktop" id="FIG-84BFE778BD9ED88339863C5DE58E83A2">
+								<span id="SPAN-FIG-84BFE778BD9ED88339863C5DE58E83A2" class="figure-image--wrapper">
+									<img id="img-FIG-84BFE778BD9ED88339863C5DE58E83A2" data-nav="5" alt="Wellington Cable Car" data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/wellington-cable-car.jpg?focalpointx=50&amp;focalpointy=50&amp;height=320&amp;outputformat=jpg&amp;quality=75&amp;source=2916838&amp;transformationsystem=focalpointcrop&amp;width=320&amp;securitytoken=4016D147648D38639E0A36EFA232707F"
+									 src="images/cards/card5.jpg">
+									<noscript>
+										<img src="images/cards/card5.jpg" alt="Wellington Cable Car" />
+									</noscript>
+								</span>
+								<h4 class="image-navigation--header__initial">Getting around
+									<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+								</h4>
+								<figcaption class="image-navigation--content">
+									<h4 class="image-navigation--header">Getting around</h4>
+									<p class="image-navigation--summary">With so many things to do and spectacular places to see, choosing how you travel around New&nbsp;Zealand is as important
+										as choosing where you want to go.</p>
+								</figcaption>
+							</figure>
+						</a>
+					</div>
+					<div class="image-navigation--item">
+						<a href="/#/nzmustdo/" data-name_key="nzmustdo">
+							<figure data-unique_id="3859165" class="has-ratio-1-1  devicecontext-desktop" id="FIG-9DEFCE9AE0CED9700D42B4AF3D4D8466">
+								<span id="SPAN-FIG-9DEFCE9AE0CED9700D42B4AF3D4D8466" class="figure-image--wrapper">
+									<img id="img-FIG-9DEFCE9AE0CED9700D42B4AF3D4D8466" data-nav="6" alt="NZMustDo" data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/nzmustdo.jpg?focalpointx=45&amp;focalpointy=58&amp;height=320&amp;outputformat=jpg&amp;quality=75&amp;source=3859165&amp;transformationsystem=focalpointcrop&amp;width=320&amp;securitytoken=98ECD51F18403458BF541B162628C76B"
+									 src="images/cards/card6.jpg">
+									<noscript>
+										<img src="images/cards/card6.jpg" alt="NZMustDo" />
+									</noscript>
+								</span>
+								<h4 class="image-navigation--header__initial">#IndianMustDo
+									<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+								</h4>
+								<figcaption class="image-navigation--content">
+									<h4 class="image-navigation--header">#IndianMustDo</h4>
+									<p class="image-navigation--summary">See the latest images from travelers exploring India.</p>
+								</figcaption>
+							</figure>
+						</a>
+					</div>
+					<div class="image-navigation--item">
+						<a href="/#/feature/top-things-to-see-and-do-around-new-zealand/" data-name_key="top-things-to-see-and-do-around-new-zealand">
+							<figure data-unique_id="2948467" class="has-ratio-1-1  devicecontext-desktop" id="FIG-5AC853EF11AD299DA7285B6722FB5396">
+								<span id="SPAN-FIG-5AC853EF11AD299DA7285B6722FB5396" class="figure-image--wrapper">
+									<img id="img-FIG-5AC853EF11AD299DA7285B6722FB5396" data-nav="7" alt="Join the cultural performances at Te Puia and learn traditional Maori song and dance."
+									 data-original="https://farm1.nzstatic.com/_proxy/imageproxy_1y/serve/cultural-performance-at-te-puia.jpg?focalpointx=53&amp;focalpointy=34&amp;height=320&amp;outputformat=jpg&amp;quality=75&amp;source=2948467&amp;transformationsystem=focalpointcrop&amp;width=320&amp;securitytoken=6BED34AD7146F9AE261C943F6C7BC2FA"
+									 src="images/cards/card7.jpg">
+									<noscript>
+										<img src="images/cards/card7.jpg" alt="Join the cultural performances at Te Puia and learn traditional Maori song and dance."
+										/>
+									</noscript>
+								</span>
+								<h4 class="image-navigation--header__initial">Top Picks
+									<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+								</h4>
+								<figcaption class="image-navigation--content">
+									<h4 class="image-navigation--header">Top Picks</h4>
+									<p class="image-navigation--summary">A collection of the must see and must do experiences around India, recommended by travellers and locals.</p>
+								</figcaption>
+							</figure>
+						</a>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+	
+</section>
+
+{% endblock %}
